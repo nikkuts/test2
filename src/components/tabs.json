@@ -1,0 +1,5 @@
+[
+    { "id": "dummyTable", "title": "dummy Table", "order": 1, "patch": "tabs/dummyTable.js" },
+    { "id": "dummyChart", "title": "dummy Chart", "order": 2, "patch": "tabs/dummyChart.js" },
+    { "id": "dummyList", "title": "dummy List", "order": 0, "patch": "tabs/dummyList.js" }
+]

@@ -1,16 +1,28 @@
+import { lazy } from "react";
+import { Route, Routes } from 'react-router-dom';
+import tabs from "./tabs.json";
+import { SharedLayout } from './SharedLayout/SharedLayout';
+
 export const App = () => {
+  const defaultTab = tabs.find(tab => tab.order === 0);
+  const DefaultComponent = lazy(() => import(`./${defaultTab.patch}`));
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<SharedLayout />}>
+          <Route index element={<DefaultComponent />} />        
+          {
+            tabs.map(({ id, patch }) => {
+              const DynamicComponent = lazy(() => import(`./${patch}`));
+
+              return (
+                <Route key={id} path={id} element={<DynamicComponent />} />
+              );
+            })
+          }
+        </Route>
+      </Routes>
+    </>
   );
 };
